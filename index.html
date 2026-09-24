@@ -28,26 +28,26 @@ footer{text-align:center;color:var(--muted);padding:24px 8px;font-style:italic}@
 </main>
 <script>
 var questions=[
-{t:"Técnica",q:"Qual é o comando correto para enviar uma mensagem no FLOBBY?",a:["/flobby sua mensagem","/Flobby sua mensagem","/flooby sua mensagem","/flobby mensagem pessoal"],c:0},
-{t:"Técnica",q:"Ao ensinar um novo médico a testar o chat interno, qual comando deve ser usado?",a:["/flobby teste","/flobby novo","/teste flobby","/flobby médico"],c:0},
-{t:"Técnica",q:"Que medicamento pode ser vendido pelas fardas azul e rosa e quanto restaura?",a:["Vitaminas — 25%","Analgésicos — 35%","Antibióticos — 50%","Analgésicos — 50%"],c:1},
-{t:"Técnica",q:"Que medicamento pode ser vendido pela farda marrom e pelos jalecos?",a:["Vitaminas — 25%","Analgésicos — 35%","Antibióticos — 50%","Antibióticos — 35%"],c:2},
-{t:"Técnica",q:"O fornecimento de tratamento ao paciente tem que efeito?",a:["Restaura 25% e vai para a mochila","Restaura 50% e fica guardado","Restaura a vida completamente no momento","Só pode ser usado por membros S.A.V.E."],c:2},
-{t:"Técnica",q:"Durante o farme, o que deve ser feito ao entrar na VTR?",a:["Desligar o gravador","Ligar os piscas-alerta e o gravador de tela","Sair da VTR para verificar a área","Iniciar venda de medicamentos"],c:1},
-{t:"Técnica",q:"Qual código Q significa «Entendido»?",a:["QAP","QSL","QTH","QTX"],c:1},
-{t:"Técnica",q:"Qual código Q é usado para solicitar apoio em casos de desvantagem nas ações?",a:["QRR","QSM","QSO","QTI"],c:0},
-{t:"Técnica",q:"Na equipa de patrulha, quem é responsável pelas macros no FLOBBY?",a:["P1","P2","P3","P4"],c:1},
-{t:"Técnica",q:"Qual destas afirmações sobre o P1 está correta?",a:["É sempre responsável pelas macros","Não abandona o volante; para reanimar deve trocar com P2 em segurança","É exclusivamente responsável por atendimentos","Pode abandonar a VTR em qualquer local"],c:1},
+{t:"Técnica",q:"Um novo efetivo escreve «/Flobby teste» durante a formação. O que deve ser corrigido?",a:["A palavra flobby deve estar em minúsculas: /flobby teste","O comando correto é /flobbytest","O teste deve ser feito no chat geral","A palavra teste deve vir antes de flobby"],c:0},
+{t:"Técnica",q:"Um médico de farda azul precisa vender medicação. Qual combinação está correta?",a:["Vitaminas — restauram 25% da vida","Analgésicos — restauram 35% da vida","Antibióticos — restauram 50% da vida","Antibióticos — restauram 35% da vida"],c:1},
+{t:"Técnica",q:"Qual associação entre farda e comprimido está totalmente correta?",a:["Roxa/verde/branca → vitaminas (25%)","Azul/rosa → antibióticos (50%)","Marrom/jalecos → analgésicos (35%)","Verde/branca → antibióticos (50%)"],c:0},
+{t:"Técnica",q:"No fornecimento de tratamento, qual afirmação distingue corretamente tratamento de comprimidos?",a:["O tratamento restaura totalmente a vida no momento e não fica guardado na mochila","O tratamento restaura 50% e pode ser guardado","O tratamento restaura 35% e só S.A.V.E. pode fornecer","O tratamento funciona como antibiótico, mas sem venda"],c:0},
+{t:"Técnica",q:"Qual sequência corresponde ao procedimento para oferecer tratamento?",a:["3 pontinhos → Aliança Médica → Oferecer ajuda médica → selecionar paciente","Aliança Médica → 3 pontinhos → Vender comprimidos → selecionar paciente","3 pontinhos → Inventário → Oferecer ajuda → confirmar farda","FLOBBY → Aliança Médica → Oferecer ajuda → selecionar paciente"],c:0},
+{t:"Técnica",q:"Qual conjunto contém apenas códigos Q associados corretamente?",a:["QAP = na escuta; QSL = entendido; QTI = a caminho","QAP = ocorrência; QSL = aguarde; QTI = local","QAP = à disposição; QSL = repita; QTI = dinheiro","QAP = nome; QSL = mensagem; QTI = viatura"],c:0},
+{t:"Técnica",q:"Precisas pedir apoio por desvantagem numa ação e indicar a tua localização. Que códigos correspondem, respetivamente?",a:["QRR e QTH","QRU e QTI","QSV e QTA","QSO e QTX"],c:0},
+{t:"Técnica",q:"Numa patrulha com P1, P2, P3 e P4, qual distribuição está correta?",a:["P1 conduz; P2 trata das macros e reveza com P1; P3/P4 atendem","P1 faz macros; P2 nunca conduz; P3 conduz; P4 drona","P1 e P2 atendem; P3/P4 ficam sempre na VTR","P1 conduz e reanima sem trocar; P2/P3/P4 fazem macros"],c:0},
+{t:"Técnica",q:"Durante o farme, qual destas combinações cumpre as regras?",a:["Autorização no FLOBBY + piscas-alerta + gravador de tela + permanecer na VTR","Autorização verbal + sair da VTR apenas para vender vitaminas","Gravador desligado + macro apenas no fim + reanimação permitida","Autorização no chat geral + piscas desligados + venda permitida"],c:0},
+{t:"Técnica",q:"Uma VTR está atribuída a uma zona, mas recebe chamado noutra. Qual procedimento está correto?",a:["Pode atender fora, depois regressa à zona e atualiza no FLOBBY quando mudar de zona","Deve ignorar qualquer chamado fora da zona","Pode mudar definitivamente de zona sem comunicar","Só pode atender se houver três VTRs em patrulha"],c:0},
 {t:"Situação",q:"Durante um turno, percebes que um efetivo demonstra repetidamente dificuldade com procedimentos. Como Supervisor(a), descreve como atuarias e a quem encaminharias a necessidade de formação.",dev:true},
 {t:"Situação",q:"Um médico quer sair sozinho para realizar uma reanimação. Que condições e autorizações devem ser verificadas antes de permitires a saída?",dev:true},
 {t:"Situação",q:"Há arruaça no piso 1 e a situação começa a perturbar o atendimento. Explica como a equipa deve agir segundo as regras do corredor.",dev:true},
 {t:"Situação",q:"Durante o farme, alguém começa a atirar ou bater na VTR. Qual é a sequência adequada de atuação?",dev:true},
-{t:"Situação",q:"Uma VTR recebe um chamado fora da zona de patrulha atribuída. O que deve fazer durante e depois do atendimento?",dev:true},
+{t:"Situação",q:"Uma VTR recebe um chamado fora da zona de patrulha atribuída. Explica o que deve fazer durante o atendimento, após o atendimento e na comunicação pelo FLOBBY.",dev:true},
 {t:"Situação",q:"Um cidadão armado pede tratamento no corredor. Como deves proceder segundo as regras internas?",dev:true},
-{t:"Situação",q:"O P1 quer participar numa reanimação durante a patrulha. Explica como isso pode ser feito sem violar a função do P1.",dev:true},
-{t:"Situação",q:"Um médico utiliza o FLOBBY para conversar sobre assuntos pessoais. Identifica o problema e explica a utilização correta deste canal.",dev:true},
-{t:"Situação",q:"Durante uma patrulha, a equipa muda de zona após atender um chamado. Que comunicação interna não pode ser esquecida?",a:["Atualizar a zona no FLOBBY","Publicar no chat geral","Avisar apenas o paciente","Nenhuma atualização é necessária"],c:0},
-{t:"Situação",q:"Durante o farme, um médico decide sair da VTR para vender comprimidos. Qual regra está a ser violada?",a:["Só é proibido vender vitaminas","Durante o farme não se deve sair da VTR nem vender medicação","Só P1 pode vender medicação","A venda é permitida se houver gravação"],c:1}
+{t:"Situação",q:"O P1 quer participar numa reanimação durante a patrulha. Explica em que condições pode fazê-lo sem abandonar indevidamente a sua função.",dev:true},
+{t:"Situação",q:"Um médico utiliza o FLOBBY para conversar sobre assuntos pessoais. Identifica o erro e explica qual é a finalidade correta deste canal.",dev:true},
+{t:"Situação",q:"Durante uma patrulha, P2 está ocupado num atendimento e é necessário atualizar as macros. Como organizarias a equipa respeitando as funções e o revezamento previstos?",dev:true},
+{t:"Situação",q:"Durante o farme, um médico sai da VTR para vender comprimidos a um cidadão. Identifica todas as regras do farme relevantes para esta situação e explica a conduta correta.",dev:true}
 ];
 var current=0, responses=[], startedAt=0, timerHandle=null;
 function el(id){return document.getElementById(id);}
