@@ -56,8 +56,11 @@ function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60)
 function render(){const x=questions[i];$("counter").textContent="Questão "+(i+1)+" / "+questions.length;$("bar").style.width=((i+1)/questions.length*100)+"%";$("type").textContent=x.t+(x.dev?" • Desenvolvimento":" • Escolha múltipla");$("question").textContent=x.q;$("answers").innerHTML="";
 if(x.dev){const ta=document.createElement("textarea");ta.placeholder="Escreve a tua resposta…";ta.value=resp[i]||"";ta.addEventListener("input",()=>resp[i]=ta.value);$("answers").appendChild(ta)}
 else{x.a.forEach((v,n)=>{const b=document.createElement("button");b.type="button";b.className="answer"+(resp[i]===n?" selected":"");b.textContent=v;b.addEventListener("click",()=>{resp[i]=n;render()});$("answers").appendChild(b)})}
-$("prev").disabled=i===0;$("next").textContent=i===questions.length-1?"Concluir teste":"Seguinte"}
-$("prev").onclick=()=>{if(i>0){i--;render()}};$("next").onclick=()=>{if(i<questions.length-1){i++;render()}else finish()}}
+$("prev").disabled=i===0;
+$("next").textContent=i===questions.length-1?"Concluir teste":"Seguinte";
+$("prev").onclick=()=>{if(i>0){i--;render()}};
+$("next").onclick=()=>{if(i<questions.length-1){i++;render()}else{finish()}};
+}
 function finish(){
  clearInterval(tick);
  $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
