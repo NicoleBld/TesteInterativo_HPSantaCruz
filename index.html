@@ -27,8 +27,7 @@ footer{text-align:center;color:var(--muted);padding:24px 8px;font-style:italic}@
 <footer>Dra. Ambar Smith</footer>
 </main>
 <script>
-'use strict';
-const questions=[
+var questions=[
 {t:"Técnica",q:"Qual é o comando correto para enviar uma mensagem no FLOBBY?",a:["/flobby sua mensagem","/Flobby sua mensagem","/flooby sua mensagem","/flobby mensagem pessoal"],c:0},
 {t:"Técnica",q:"Ao ensinar um novo médico a testar o chat interno, qual comando deve ser usado?",a:["/flobby teste","/flobby novo","/teste flobby","/flobby médico"],c:0},
 {t:"Técnica",q:"Que medicamento pode ser vendido pelas fardas azul e rosa e quanto restaura?",a:["Vitaminas — 25%","Analgésicos — 35%","Antibióticos — 50%","Analgésicos — 50%"],c:1},
@@ -50,36 +49,45 @@ const questions=[
 {t:"Situação",q:"Durante uma patrulha, a equipa muda de zona após atender um chamado. Que comunicação interna não pode ser esquecida?",a:["Atualizar a zona no FLOBBY","Publicar no chat geral","Avisar apenas o paciente","Nenhuma atualização é necessária"],c:0},
 {t:"Situação",q:"Durante o farme, um médico decide sair da VTR para vender comprimidos. Qual regra está a ser violada?",a:["Só é proibido vender vitaminas","Durante o farme não se deve sair da VTR nem vender medicação","Só P1 pode vender medicação","A venda é permitida se houver gravação"],c:1}
 ];
-let i=0,resp=[],startAt=0,tick=null;
-const $=id=>document.getElementById(id);
-function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
-function render(){const x=questions[i];$("counter").textContent="Questão "+(i+1)+" / "+questions.length;$("bar").style.width=((i+1)/questions.length*100)+"%";$("type").textContent=x.t+(x.dev?" • Desenvolvimento":" • Escolha múltipla");$("question").textContent=x.q;$("answers").innerHTML="";
-if(x.dev){const ta=document.createElement("textarea");ta.placeholder="Escreve a tua resposta…";ta.value=resp[i]||"";ta.addEventListener("input",()=>resp[i]=ta.value);$("answers").appendChild(ta)}
-else{x.a.forEach((v,n)=>{const b=document.createElement("button");b.type="button";b.className="answer"+(resp[i]===n?" selected":"");b.textContent=v;b.addEventListener("click",()=>{resp[i]=n;render()});$("answers").appendChild(b)})}
-$("prev").disabled=i===0;
-$("next").textContent=i===questions.length-1?"Concluir teste":"Seguinte";
-$("prev").onclick=()=>{if(i>0){i--;render()}};
-$("next").onclick=()=>{if(i<questions.length-1){i++;render()}else{finish()}};
+var current=0, responses=[], startedAt=0, timerHandle=null;
+function el(id){return document.getElementById(id);}
+function formatTime(sec){var m=Math.floor(sec/60),s=sec%60;return (m<10?"0":"")+m+":"+(s<10?"0":"")+s;}
+function showQuestion(){
+ var x=questions[current], box=el("answers");
+ el("counter").textContent="Questão "+(current+1)+" / "+questions.length;
+ el("bar").style.width=((current+1)/questions.length*100)+"%";
+ el("type").textContent=x.t+(x.dev?" • Desenvolvimento":" • Escolha múltipla");
+ el("question").textContent=x.q; box.innerHTML="";
+ if(x.dev){
+  var ta=document.createElement("textarea"); ta.placeholder="Escreve a tua resposta…"; ta.value=responses[current]||"";
+  ta.oninput=function(){responses[current]=ta.value;}; box.appendChild(ta);
+ } else {
+  for(var n=0;n<x.a.length;n++){(function(n){
+   var b=document.createElement("button"); b.type="button"; b.className="answer"+(responses[current]===n?" selected":""); b.textContent=x.a[n];
+   b.onclick=function(){responses[current]=n;showQuestion();}; box.appendChild(b);
+  })(n);}
+ }
+ el("prev").disabled=current===0;
+ el("next").textContent=current===questions.length-1?"Concluir teste":"Seguinte";
 }
-function finish(){
- clearInterval(tick);
- $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
- let right=0,total=0;
- questions.forEach((x,n)=>{if(!x.dev){total++;if(resp[n]===x.c)right++}});
- $("score").textContent=right+" / "+total+" objetivas";
- $("timeFinal").textContent="Tempo total: "+fmt(Math.floor((Date.now()-startAt)/1000));
- $("review").innerHTML="";
- questions.forEach((x,n)=>{
-   const d=document.createElement("div"); d.className="review";
-   if(x.dev){
-     d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span>Resposta de desenvolvimento registada para avaliação.</span>";
-   }else{
-     const ok=resp[n]===x.c;
-     d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span class='"+(ok?"ok":"bad")+"'>"+(ok?"✓ Correta":"✗ Incorreta")+"</span><br><small>Resposta correta: "+x.a[x.c]+"</small>";
-   }
-   $("review").appendChild(d);
- });
+function finishTest(){
+ clearInterval(timerHandle); el("quiz").classList.add("hidden"); el("result").classList.remove("hidden");
+ var right=0,total=0,review=el("review"); review.innerHTML="";
+ for(var n=0;n<questions.length;n++){
+  var x=questions[n],d=document.createElement("div"); d.className="review";
+  if(x.dev){d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span>Resposta de desenvolvimento registada para avaliação.</span>";}
+  else{total++;var ok=responses[n]===x.c;if(ok)right++;
+   d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span class='"+(ok?"ok":"bad")+"'>"+(ok?"✓ Correta":"✗ Incorreta")+"</span><br><small>Resposta correta: "+x.a[x.c]+"</small>";
+  } review.appendChild(d);
+ }
+ el("score").textContent=right+" / "+total+" objetivas";
+ el("timeFinal").textContent="Tempo total: "+formatTime(Math.floor((Date.now()-startedAt)/1000));
 }
-$("start").addEventListener("click",()=>{$("intro").classList.add("hidden");$("quiz").classList.remove("hidden");startAt=Date.now();tick=setInterval(()=>$("timer").textContent=fmt(Math.floor((Date.now()-startAt)/1000)),1000);render()});
-$("restart").addEventListener("click",()=>{i=0;resp=[];$("result").classList.add("hidden");$("intro").classList.remove("hidden");$("timer").textContent="00:00"});
+el("start").onclick=function(){
+ el("intro").classList.add("hidden"); el("quiz").classList.remove("hidden"); startedAt=Date.now();
+ timerHandle=setInterval(function(){el("timer").textContent=formatTime(Math.floor((Date.now()-startedAt)/1000));},1000); showQuestion();
+};
+el("prev").onclick=function(){if(current>0){current--;showQuestion();}};
+el("next").onclick=function(){if(current<questions.length-1){current++;showQuestion();}else{finishTest();}};
+el("restart").onclick=function(){current=0;responses=[];clearInterval(timerHandle);el("result").classList.add("hidden");el("intro").classList.remove("hidden");el("timer").textContent="00:00";};
 </script></body></html>
