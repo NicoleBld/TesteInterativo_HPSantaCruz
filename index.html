@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teste Interativo | HP Santa Cruz</title>
+<style>
+:root{--rose:#a64262;--deep:#69283e;--soft:#fff4f7;--line:#edcbd5;--ink:#30252a;--muted:#76666d;--ok:#237a57;--bad:#a53a46}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:linear-gradient(145deg,#fff,#fff1f5)}
+.wrap{max-width:860px;margin:auto;padding:22px}.hero{text-align:center;padding:26px 12px}.mark{width:70px;height:70px;border:2px solid var(--rose);border-radius:50%;margin:auto;display:grid;place-items:center;color:var(--rose);font-size:34px;font-weight:800}
+h1{margin:12px 0 4px;color:var(--deep)}.sub{color:var(--rose);font-weight:700}.card{background:#ffffffd9;border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 10px 28px #6d294312}
+.meta{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}.pill{background:var(--soft);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-weight:700;color:var(--deep)}
+.progress{height:9px;background:#f4dfe5;border-radius:9px;overflow:hidden;margin:15px 0}.progress i{display:block;height:100%;background:var(--rose);width:0;transition:.2s}
+.q{font-size:1.1rem;font-weight:750;line-height:1.45}.answers{display:grid;gap:10px;margin-top:15px}.answer{width:100%;text-align:left;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:white;font-size:1rem;cursor:pointer}.answer:hover,.answer:focus{border-color:var(--rose);outline:none}.answer.selected{background:var(--soft);border:2px solid var(--rose)}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.btn{border:0;border-radius:14px;padding:12px 17px;font-weight:800;cursor:pointer}.primary{background:var(--deep);color:white}.ghost{background:#f7e8ed;color:var(--deep)}button:disabled{opacity:.45;cursor:not-allowed}
+.hidden{display:none}.score{text-align:center;font-size:2.2rem;color:var(--deep);font-weight:900}.review{border-top:1px solid var(--line);padding:13px 0}.ok{color:var(--ok)}.bad{color:var(--bad)}textarea{width:100%;min-height:130px;border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit;resize:vertical}
+footer{text-align:center;color:var(--muted);padding:24px 8px;font-style:italic}@media(max-width:520px){.wrap{padding:12px}.card{padding:16px}.actions{flex-direction:column-reverse}.btn{width:100%}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero"><div class="mark">✚</div><div class="sub">HOSPITAL SANTA CRUZ</div><h1>Teste Interativo</h1><p>Manual de Estudos • Condutas • RP • S.A.V.E. • Procedimentos</p></section>
+<section id="intro" class="card"><h2>Antes de começar</h2><p>São 20 questões: 10 técnicas e 10 situações práticas. As questões de escolha têm tempo recomendado de 45 segundos; as situações de desenvolvimento permitem mais tempo. No final recebes a pontuação e a revisão das respostas objetivas.</p><button id="start" class="btn primary">Começar teste</button></section>
+<section id="quiz" class="hidden">
+<div class="meta"><span id="counter" class="pill"></span><span id="timer" class="pill">00:00</span></div><div class="progress"><i id="bar"></i></div>
+<div class="card"><div id="type" class="sub"></div><p id="question" class="q"></p><div id="answers" class="answers"></div><div class="actions"><button id="prev" class="btn ghost">Anterior</button><button id="next" class="btn primary">Seguinte</button></div></div>
+</section>
+<section id="result" class="card hidden"><h2>Resultado</h2><div id="score" class="score"></div><p id="timeFinal" style="text-align:center"></p><div id="review"></div><button id="restart" class="btn primary">Fazer novamente</button></section>
+<footer>Dra. Ambar Smith</footer>
+</main>
+<script>
+const questions=[
+{t:"Técnica",q:"Qual é o comando correto para enviar uma mensagem no FLOBBY?",a:["/flobby sua mensagem","/Flobby sua mensagem","/flooby sua mensagem","/flobby mensagem pessoal"],c:0},
+{t:"Técnica",q:"Ao ensinar um novo médico a testar o chat interno, qual comando deve ser usado?",a:["/flobby teste","/flobby novo","/teste flobby","/flobby médico"],c:0},
+{t:"Técnica",q:"Que medicamento pode ser vendido pelas fardas azul e rosa e quanto restaura?",a:["Vitaminas — 25%","Analgésicos — 35%","Antibióticos — 50%","Analgésicos — 50%"],c:1},
+{t:"Técnica",q:"Que medicamento pode ser vendido pela farda marrom e pelos jalecos?",a:["Vitaminas — 25%","Analgésicos — 35%","Antibióticos — 50%","Antibióticos — 35%"],c:2},
+{t:"Técnica",q:"O fornecimento de tratamento ao paciente tem que efeito?",a:["Restaura 25% e vai para a mochila","Restaura 50% e fica guardado","Restaura a vida completamente no momento","Só pode ser usado por membros S.A.V.E."],c:2},
+{t:"Técnica",q:"Durante o farme, o que deve ser feito ao entrar na VTR?",a:["Desligar o gravador","Ligar os piscas-alerta e o gravador de tela","Sair da VTR para verificar a área","Iniciar venda de medicamentos"],c:1},
+{t:"Técnica",q:"Qual código Q significa «Entendido»?",a:["QAP","QSL","QTH","QTX"],c:1},
+{t:"Técnica",q:"Qual código Q é usado para solicitar apoio em casos de desvantagem nas ações?",a:["QRR","QSM","QSO","QTI"],c:0},
+{t:"Técnica",q:"Na equipa de patrulha, quem é responsável pelas macros no FLOBBY?",a:["P1","P2","P3","P4"],c:1},
+{t:"Técnica",q:"Qual destas afirmações sobre o P1 está correta?",a:["É sempre responsável pelas macros","Não abandona o volante; para reanimar deve trocar com P2 em segurança","É exclusivamente responsável por atendimentos","Pode abandonar a VTR em qualquer local"],c:1},
+{t:"Situação",q:"Durante um turno, percebes que um efetivo demonstra repetidamente dificuldade com procedimentos. Como Supervisor(a), descreve como atuarias e a quem encaminharias a necessidade de formação.",dev:true},
+{t:"Situação",q:"Um médico quer sair sozinho para realizar uma reanimação. Que condições e autorizações devem ser verificadas antes de permitires a saída?",dev:true},
+{t:"Situação",q:"Há arruaça no piso 1 e a situação começa a perturbar o atendimento. Explica como a equipa deve agir segundo as regras do corredor.",dev:true},
+{t:"Situação",q:"Durante o farme, alguém começa a atirar ou bater na VTR. Qual é a sequência adequada de atuação?",dev:true},
+{t:"Situação",q:"Uma VTR recebe um chamado fora da zona de patrulha atribuída. O que deve fazer durante e depois do atendimento?",dev:true},
+{t:"Situação",q:"Um cidadão armado pede tratamento no corredor. Como deves proceder segundo as regras internas?",dev:true},
+{t:"Situação",q:"O P1 quer participar numa reanimação durante a patrulha. Explica como isso pode ser feito sem violar a função do P1.",dev:true},
+{t:"Situação",q:"Um médico utiliza o FLOBBY para conversar sobre assuntos pessoais. Identifica o problema e explica a utilização correta deste canal.",dev:true},
+{t:"Situação",q:"Durante uma patrulha, a equipa muda de zona após atender um chamado. Que comunicação interna não pode ser esquecida?",a:["Atualizar a zona no FLOBBY","Publicar no chat geral","Avisar apenas o paciente","Nenhuma atualização é necessária"],c:0},
+{t:"Situação",q:"Durante o farme, um médico decide sair da VTR para vender comprimidos. Qual regra está a ser violada?",a:["Só é proibido vender vitaminas","Durante o farme não se deve sair da VTR nem vender medicação","Só P1 pode vender medicação","A venda é permitida se houver gravação"],c:1}
+];
+let i=0,resp=[],startAt=0,tick=null;
+const $=id=>document.getElementById(id);
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function render(){const x=questions[i];$("counter").textContent="Questão "+(i+1)+" / "+questions.length;$("bar").style.width=((i+1)/questions.length*100)+"%";$("type").textContent=x.t+(x.dev?" • Desenvolvimento":" • Escolha múltipla");$("question").textContent=x.q;$("answers").innerHTML="";
+if(x.dev){const ta=document.createElement("textarea");ta.placeholder="Escreve a tua resposta…";ta.value=resp[i]||"";ta.addEventListener("input",()=>resp[i]=ta.value);$("answers").appendChild(ta)}
+else{x.a.forEach((v,n)=>{const b=document.createElement("button");b.type="button";b.className="answer"+(resp[i]===n?" selected":"");b.textContent=v;b.addEventListener("click",()=>{resp[i]=n;render()});$("answers").appendChild(b)})}
+$("prev").disabled=i===0;$("next").textContent=i===questions.length-1?"Concluir teste":"Seguinte"}
+$("prev").onclick=()=>{if(i>0){i--;render()}};$("next").onclick=()=>{if(i<questions.length-1){i++;render()}else finish()}}
+function finish(){clearInterval(tick);$("quiz").classList.add("hidden");$("result").classList.remove("hidden");let right=0,total=0;questions.forEach((x,n)=>{if(!x.dev){total++;if(resp[n]===x.c)right++}});$("score").textContent=right+" / "+total+" objetivas";$("timeFinal").textContent="Tempo total: "+fmt(Math.floor((Date.now()-startAt)/1000));
+$("review").innerHTML="";questions.forEach((x,n)=>{const d=document.createElement("div");d.className="review";if(x.dev){d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span>Resposta de desenvolvimento registada para avaliação.</span>"}else{const ok=resp[n]===x.c;d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span class='"+(ok?"ok":"bad")+"'>"+(ok?"✓ Correta":"✗ Incorreta")+"</span><br><small>Resposta correta: "+x.a[x.c]+"</small>"}$("review").appendChild(d)})}
+$("start").addEventListener("click",()=>{$("intro").classList.add("hidden");$("quiz").classList.remove("hidden");startAt=Date.now();tick=setInterval(()=>$("timer").textContent=fmt(Math.floor((Date.now()-startAt)/1000)),1000);render()});
+$("restart").addEventListener("click",()=>{i=0;resp=[];$("result").classList.add("hidden");$("intro").classList.remove("hidden");$("timer").textContent="00:00"});
+</script></body></html>
