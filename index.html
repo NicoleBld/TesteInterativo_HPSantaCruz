@@ -4,21 +4,52 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Teste Interativo | HP Santa Cruz</title>
 <style>
-:root{--rose:#a64262;--deep:#69283e;--soft:#fff4f7;--line:#edcbd5;--ink:#30252a;--muted:#76666d;--ok:#237a57;--bad:#a53a46}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:linear-gradient(145deg,#fff,#fff1f5)}
-.wrap{max-width:860px;margin:auto;padding:22px}.hero{text-align:center;padding:26px 12px}.mark{width:70px;height:70px;border:2px solid var(--rose);border-radius:50%;margin:auto;display:grid;place-items:center;color:var(--rose);font-size:34px;font-weight:800}
-h1{margin:12px 0 4px;color:var(--deep)}.sub{color:var(--rose);font-weight:700}.card{background:#ffffffd9;border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 10px 28px #6d294312}
-.meta{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}.pill{background:var(--soft);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-weight:700;color:var(--deep)}
-.progress{height:9px;background:#f4dfe5;border-radius:9px;overflow:hidden;margin:15px 0}.progress i{display:block;height:100%;background:var(--rose);width:0;transition:.2s}
-.q{font-size:1.1rem;font-weight:750;line-height:1.45}.answers{display:grid;gap:10px;margin-top:15px}.answer{width:100%;text-align:left;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:white;font-size:1rem;cursor:pointer}.answer:hover,.answer:focus{border-color:var(--rose);outline:none}.answer.selected{background:var(--soft);border:2px solid var(--rose)}
-.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.btn{border:0;border-radius:14px;padding:12px 17px;font-weight:800;cursor:pointer}.primary{background:var(--deep);color:white}.ghost{background:#f7e8ed;color:var(--deep)}button:disabled{opacity:.45;cursor:not-allowed}
-.hidden{display:none}.score{text-align:center;font-size:2.2rem;color:var(--deep);font-weight:900}.review{border-top:1px solid var(--line);padding:13px 0}.ok{color:var(--ok)}.bad{color:var(--bad)}textarea{width:100%;min-height:130px;border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit;resize:vertical}
-footer{text-align:center;color:var(--muted);padding:24px 8px;font-style:italic}@media(max-width:520px){.wrap{padding:12px}.card{padding:16px}.actions{flex-direction:column-reverse}.btn{width:100%}}
+:root{--rose:#b74d72;--deep:#67263e;--wine:#853653;--blush:#fff3f7;--paper:#fffafb;--line:#efccd8;--ink:#33272c;--muted:#7b6970;--ok:#28765b;--bad:#a53a46}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh;background:radial-gradient(circle at 15% 5%,#f8ccdc 0,transparent 25%),radial-gradient(circle at 90% 18%,#f4dbe4 0,transparent 24%),linear-gradient(155deg,#fffdfd,#fbeef3 55%,#f7e2ea);background-attachment:fixed}
+body:before{content:"✚";position:fixed;right:-55px;bottom:-95px;font-size:330px;font-weight:900;color:#b74d7209;z-index:-1}
+.wrap{max-width:920px;margin:auto;padding:28px 18px 38px}
+.hero{position:relative;text-align:center;padding:38px 18px 28px;margin-bottom:10px}
+.hero:after{content:"";display:block;width:120px;height:3px;margin:18px auto 0;border-radius:5px;background:linear-gradient(90deg,transparent,var(--rose),transparent)}
+.mark{width:84px;height:84px;border:1px solid #d88aa4;border-radius:24px;margin:0 auto 15px;display:grid;place-items:center;color:white;font-size:40px;font-weight:900;background:linear-gradient(145deg,var(--deep),var(--rose));box-shadow:0 14px 34px #7c2c4930, inset 0 0 0 6px #ffffff18;transform:rotate(45deg)}
+.mark::first-line{transform:rotate(-45deg)}
+h1{margin:7px 0 5px;color:var(--deep);font-family:Georgia,serif;font-size:clamp(2.1rem,6vw,3.6rem);letter-spacing:-1px}
+.hero p{margin:9px 0;color:var(--muted);font-size:.96rem}
+.sub{color:var(--rose);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+.card{position:relative;overflow:hidden;background:#fffdfdec;border:1px solid #fff;border-radius:26px;padding:26px;margin:16px 0;box-shadow:0 18px 55px #6d294316,0 2px 8px #6d29430d;backdrop-filter:blur(10px)}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--deep),var(--rose),#e9a4ba)}
+.card h2{font-family:Georgia,serif;color:var(--deep);font-size:1.65rem;margin-top:0}
+#intro:after{content:"HOSPITAL SANTA CRUZ";position:absolute;right:20px;bottom:15px;font-size:.68rem;letter-spacing:.18em;color:#b74d7245;font-weight:900}
+.meta{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.pill{background:#fff9fb;border:1px solid var(--line);padding:9px 14px;border-radius:999px;font-weight:800;color:var(--deep);box-shadow:0 4px 12px #7b2b4710}
+.progress{height:10px;background:#efdce3;border-radius:20px;overflow:hidden;margin:17px 0 20px;box-shadow:inset 0 1px 3px #6d294318}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--deep),var(--rose),#dc8ca8);width:0;transition:.3s;border-radius:20px}
+.q{font-size:1.13rem;font-weight:760;line-height:1.58;margin:10px 0 5px}
+.answers{display:grid;gap:11px;margin-top:19px}
+.answer{position:relative;width:100%;text-align:left;padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(145deg,#fff,#fff9fb);font-size:1rem;cursor:pointer;color:var(--ink);transition:.18s;box-shadow:0 4px 13px #69283e0b}
+.answer:hover,.answer:focus{border-color:var(--rose);transform:translateY(-1px);outline:none;box-shadow:0 8px 18px #69283e14}
+.answer.selected{background:linear-gradient(145deg,#fff0f5,#fbe0e9);border:2px solid var(--rose);color:var(--deep);font-weight:750}
+.answer.selected:after{content:"✓";position:absolute;right:15px;color:var(--rose);font-weight:900}
+.actions{display:flex;justify-content:space-between;gap:11px;margin-top:22px}
+.btn{border:0;border-radius:15px;padding:13px 20px;font-weight:850;cursor:pointer;transition:.18s}
+.primary{background:linear-gradient(135deg,var(--deep),var(--rose));color:white;box-shadow:0 8px 20px #69283e2c}
+.primary:hover{transform:translateY(-1px);box-shadow:0 11px 24px #69283e36}
+.ghost{background:#f8e8ee;color:var(--deep);border:1px solid var(--line)}
+button:disabled{opacity:.42;cursor:not-allowed;transform:none}
+.hidden{display:none}.score{text-align:center;font-family:Georgia,serif;font-size:2.7rem;color:var(--deep);font-weight:900;margin:12px 0}
+#timeFinal{text-align:center;color:var(--muted);font-weight:650}
+.review{border-top:1px solid var(--line);padding:16px 3px;line-height:1.45}.review:first-of-type{margin-top:20px}
+.ok{color:var(--ok);font-weight:800}.bad{color:var(--bad);font-weight:800}
+textarea{width:100%;min-height:190px;border:1px solid var(--line);border-radius:17px;padding:15px;font:inherit;line-height:1.5;resize:vertical;background:#fffafb;outline:none}
+textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px #b74d7214}
+footer{text-align:center;color:var(--deep);padding:27px 8px 12px;font-family:Georgia,serif;font-style:italic;font-size:1.02rem}
+footer:before{content:"✚  HP SANTA CRUZ  •  VIDAS EM BOAS MÃOS  ✚";display:block;font-family:system-ui,sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.15em;color:var(--rose);margin-bottom:10px}
+@media(max-width:520px){.wrap{padding:12px}.hero{padding-top:26px}.card{padding:20px 17px}.actions{flex-direction:column-reverse}.btn{width:100%}.mark{width:72px;height:72px}.q{font-size:1.04rem}}
 </style>
 </head>
 <body><main class="wrap">
 <section class="hero"><div class="mark">✚</div><div class="sub">HOSPITAL SANTA CRUZ</div><h1>Teste Interativo</h1><p>Manual de Estudos • Condutas • RP • S.A.V.E. • Procedimentos</p></section>
-<section id="intro" class="card"><h2>Antes de começar</h2><p>São 20 questões: 10 técnicas e 10 situações práticas. As questões de escolha têm tempo recomendado de 45 segundos; as situações de desenvolvimento permitem mais tempo. No final recebes a pontuação e a revisão das respostas objetivas.</p><button id="start" class="btn primary">Começar teste</button></section>
+<section id="intro" class="card"><h2>Antes de começar</h2><p>São 20 questões: 19 de escolha múltipla e 1 questão final de desenvolvimento. O cronómetro acompanha o tempo total da prova. No final recebes a pontuação das questões objetivas e podes rever as respostas.</p><button id="start" class="btn primary">Começar teste</button></section>
 <section id="quiz" class="hidden">
 <div class="meta"><span id="counter" class="pill"></span><span id="timer" class="pill">00:00</span></div><div class="progress"><i id="bar"></i></div>
 <div class="card"><div id="type" class="sub"></div><p id="question" class="q"></p><div id="answers" class="answers"></div><div class="actions"><button id="prev" class="btn ghost">Anterior</button><button id="next" class="btn primary">Seguinte</button></div></div>
