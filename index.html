@@ -27,6 +27,7 @@ footer{text-align:center;color:var(--muted);padding:24px 8px;font-style:italic}@
 <footer>Dra. Ambar Smith</footer>
 </main>
 <script>
+'use strict';
 const questions=[
 {t:"Técnica",q:"Qual é o comando correto para enviar uma mensagem no FLOBBY?",a:["/flobby sua mensagem","/Flobby sua mensagem","/flooby sua mensagem","/flobby mensagem pessoal"],c:0},
 {t:"Técnica",q:"Ao ensinar um novo médico a testar o chat interno, qual comando deve ser usado?",a:["/flobby teste","/flobby novo","/teste flobby","/flobby médico"],c:0},
@@ -57,8 +58,25 @@ if(x.dev){const ta=document.createElement("textarea");ta.placeholder="Escreve a 
 else{x.a.forEach((v,n)=>{const b=document.createElement("button");b.type="button";b.className="answer"+(resp[i]===n?" selected":"");b.textContent=v;b.addEventListener("click",()=>{resp[i]=n;render()});$("answers").appendChild(b)})}
 $("prev").disabled=i===0;$("next").textContent=i===questions.length-1?"Concluir teste":"Seguinte"}
 $("prev").onclick=()=>{if(i>0){i--;render()}};$("next").onclick=()=>{if(i<questions.length-1){i++;render()}else finish()}}
-function finish(){clearInterval(tick);$("quiz").classList.add("hidden");$("result").classList.remove("hidden");let right=0,total=0;questions.forEach((x,n)=>{if(!x.dev){total++;if(resp[n]===x.c)right++}});$("score").textContent=right+" / "+total+" objetivas";$("timeFinal").textContent="Tempo total: "+fmt(Math.floor((Date.now()-startAt)/1000));
-$("review").innerHTML="";questions.forEach((x,n)=>{const d=document.createElement("div");d.className="review";if(x.dev){d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span>Resposta de desenvolvimento registada para avaliação.</span>"}else{const ok=resp[n]===x.c;d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span class='"+(ok?"ok":"bad")+"'>"+(ok?"✓ Correta":"✗ Incorreta")+"</span><br><small>Resposta correta: "+x.a[x.c]+"</small>"}$("review").appendChild(d)})}
+function finish(){
+ clearInterval(tick);
+ $("quiz").classList.add("hidden"); $("result").classList.remove("hidden");
+ let right=0,total=0;
+ questions.forEach((x,n)=>{if(!x.dev){total++;if(resp[n]===x.c)right++}});
+ $("score").textContent=right+" / "+total+" objetivas";
+ $("timeFinal").textContent="Tempo total: "+fmt(Math.floor((Date.now()-startAt)/1000));
+ $("review").innerHTML="";
+ questions.forEach((x,n)=>{
+   const d=document.createElement("div"); d.className="review";
+   if(x.dev){
+     d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span>Resposta de desenvolvimento registada para avaliação.</span>";
+   }else{
+     const ok=resp[n]===x.c;
+     d.innerHTML="<strong>"+(n+1)+". "+x.q+"</strong><br><span class='"+(ok?"ok":"bad")+"'>"+(ok?"✓ Correta":"✗ Incorreta")+"</span><br><small>Resposta correta: "+x.a[x.c]+"</small>";
+   }
+   $("review").appendChild(d);
+ });
+}
 $("start").addEventListener("click",()=>{$("intro").classList.add("hidden");$("quiz").classList.remove("hidden");startAt=Date.now();tick=setInterval(()=>$("timer").textContent=fmt(Math.floor((Date.now()-startAt)/1000)),1000);render()});
 $("restart").addEventListener("click",()=>{i=0;resp=[];$("result").classList.add("hidden");$("intro").classList.remove("hidden");$("timer").textContent="00:00"});
 </script></body></html>
