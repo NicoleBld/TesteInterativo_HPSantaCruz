@@ -4,52 +4,63 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Teste Interativo | HP Santa Cruz</title>
 <style>
-:root{--rose:#b74d72;--deep:#67263e;--wine:#853653;--blush:#fff3f7;--paper:#fffafb;--line:#efccd8;--ink:#33272c;--muted:#7b6970;--ok:#28765b;--bad:#a53a46}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh;background:radial-gradient(circle at 15% 5%,#f8ccdc 0,transparent 25%),radial-gradient(circle at 90% 18%,#f4dbe4 0,transparent 24%),linear-gradient(155deg,#fffdfd,#fbeef3 55%,#f7e2ea);background-attachment:fixed}
-body:before{content:"✚";position:fixed;right:-55px;bottom:-95px;font-size:330px;font-weight:900;color:#b74d7209;z-index:-1}
-.wrap{max-width:920px;margin:auto;padding:28px 18px 38px}
-.hero{position:relative;text-align:center;padding:38px 18px 28px;margin-bottom:10px}
-.hero:after{content:"";display:block;width:120px;height:3px;margin:18px auto 0;border-radius:5px;background:linear-gradient(90deg,transparent,var(--rose),transparent)}
-.mark{width:84px;height:84px;border:1px solid #d88aa4;border-radius:24px;margin:0 auto 15px;display:grid;place-items:center;color:white;font-size:40px;font-weight:900;background:linear-gradient(145deg,var(--deep),var(--rose));box-shadow:0 14px 34px #7c2c4930, inset 0 0 0 6px #ffffff18;transform:rotate(45deg)}
-.mark::first-line{transform:rotate(-45deg)}
-h1{margin:7px 0 5px;color:var(--deep);font-family:Georgia,serif;font-size:clamp(2.1rem,6vw,3.6rem);letter-spacing:-1px}
-.hero p{margin:9px 0;color:var(--muted);font-size:.96rem}
-.sub{color:var(--rose);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
-.card{position:relative;overflow:hidden;background:#fffdfdec;border:1px solid #fff;border-radius:26px;padding:26px;margin:16px 0;box-shadow:0 18px 55px #6d294316,0 2px 8px #6d29430d;backdrop-filter:blur(10px)}
-.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--deep),var(--rose),#e9a4ba)}
-.card h2{font-family:Georgia,serif;color:var(--deep);font-size:1.65rem;margin-top:0}
-#intro:after{content:"HOSPITAL SANTA CRUZ";position:absolute;right:20px;bottom:15px;font-size:.68rem;letter-spacing:.18em;color:#b74d7245;font-weight:900}
+:root{--hot:#ef3f83;--pink:#d91f69;--wine:#741d46;--deep:#43132d;--soft:#fff0f6;--line:#f5b6cf;--ink:#302129;--muted:#77616c;--ok:#16845f;--bad:#b52d49}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh;background:linear-gradient(145deg,#fff8fb 0%,#ffd8e8 48%,#f9b9d3 100%);background-attachment:fixed;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;border-radius:50%;filter:blur(4px);z-index:-2;animation:float 8s ease-in-out infinite}
+body:before{width:380px;height:380px;left:-150px;top:-110px;background:#ef3f8330}
+body:after{width:460px;height:460px;right:-190px;bottom:-180px;background:#8d285030;animation-delay:-3s}
+@keyframes float{50%{transform:translateY(24px) translateX(14px) scale(1.05)}}
+@keyframes pulse{50%{box-shadow:0 0 0 13px #ef3f8310,0 18px 45px #741d4650}}
+@keyframes shine{0%{transform:translateX(-150%) skewX(-20deg)}100%{transform:translateX(420%) skewX(-20deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.wrap{max-width:940px;margin:auto;padding:22px 18px 42px}
+.hero{text-align:center;padding:38px 18px 30px;position:relative;animation:rise .7s ease both}
+.hp-badge{width:104px;height:104px;margin:auto;position:relative;display:grid;place-items:center;border-radius:30px;background:linear-gradient(145deg,var(--deep),var(--hot));box-shadow:0 18px 45px #741d4645;animation:pulse 3s ease-in-out infinite}
+.hp-badge:before{content:"✚";font-size:57px;color:#fff;text-shadow:0 0 20px #fff8}
+.hp-badge:after{content:"HP";position:absolute;bottom:8px;right:11px;color:#fff;font-weight:900;font-size:13px;letter-spacing:.08em}
+.brand{margin-top:16px;color:var(--wine);font-weight:950;letter-spacing:.15em;font-size:.82rem}
+h1{font-family:Georgia,serif;font-size:clamp(2.5rem,7vw,4.3rem);margin:5px 0;background:linear-gradient(90deg,var(--deep),var(--pink),var(--deep));-webkit-background-clip:text;color:transparent;letter-spacing:-2px}
+.hero p{color:#6c4053;margin:8px 0;font-weight:650}
+.medline{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.medchip{background:#ffffffb8;border:1px solid #fff;padding:7px 11px;border-radius:999px;color:var(--wine);font-size:.75rem;font-weight:800;box-shadow:0 5px 15px #741d4615}
+.card{position:relative;overflow:hidden;background:#fffdfdeb;border:1px solid #fff;border-radius:28px;padding:28px;margin:16px 0;box-shadow:0 22px 65px #741d4624,0 3px 12px #741d4615;backdrop-filter:blur(12px);animation:rise .45s ease both}
+.card:before{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:linear-gradient(90deg,var(--deep),var(--hot),#ff9bc1,var(--pink))}
+.card:after{content:"✚";position:absolute;right:-20px;bottom:-54px;font-size:170px;color:#ef3f8308;font-weight:900;pointer-events:none}
+.card h2{font-family:Georgia,serif;color:var(--deep);font-size:1.8rem;margin:3px 0 12px}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.info{background:linear-gradient(145deg,#fff5f9,#ffe4ef);border:1px solid var(--line);border-radius:18px;padding:14px;text-align:center;color:var(--wine);font-weight:800;font-size:.82rem}
+.info b{display:block;font-size:1.35rem;color:var(--pink);margin-bottom:2px}
 .meta{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
-.pill{background:#fff9fb;border:1px solid var(--line);padding:9px 14px;border-radius:999px;font-weight:800;color:var(--deep);box-shadow:0 4px 12px #7b2b4710}
-.progress{height:10px;background:#efdce3;border-radius:20px;overflow:hidden;margin:17px 0 20px;box-shadow:inset 0 1px 3px #6d294318}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--deep),var(--rose),#dc8ca8);width:0;transition:.3s;border-radius:20px}
-.q{font-size:1.13rem;font-weight:760;line-height:1.58;margin:10px 0 5px}
-.answers{display:grid;gap:11px;margin-top:19px}
-.answer{position:relative;width:100%;text-align:left;padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(145deg,#fff,#fff9fb);font-size:1rem;cursor:pointer;color:var(--ink);transition:.18s;box-shadow:0 4px 13px #69283e0b}
-.answer:hover,.answer:focus{border-color:var(--rose);transform:translateY(-1px);outline:none;box-shadow:0 8px 18px #69283e14}
-.answer.selected{background:linear-gradient(145deg,#fff0f5,#fbe0e9);border:2px solid var(--rose);color:var(--deep);font-weight:750}
-.answer.selected:after{content:"✓";position:absolute;right:15px;color:var(--rose);font-weight:900}
-.actions{display:flex;justify-content:space-between;gap:11px;margin-top:22px}
-.btn{border:0;border-radius:15px;padding:13px 20px;font-weight:850;cursor:pointer;transition:.18s}
-.primary{background:linear-gradient(135deg,var(--deep),var(--rose));color:white;box-shadow:0 8px 20px #69283e2c}
-.primary:hover{transform:translateY(-1px);box-shadow:0 11px 24px #69283e36}
-.ghost{background:#f8e8ee;color:var(--deep);border:1px solid var(--line)}
-button:disabled{opacity:.42;cursor:not-allowed;transform:none}
-.hidden{display:none}.score{text-align:center;font-family:Georgia,serif;font-size:2.7rem;color:var(--deep);font-weight:900;margin:12px 0}
-#timeFinal{text-align:center;color:var(--muted);font-weight:650}
-.review{border-top:1px solid var(--line);padding:16px 3px;line-height:1.45}.review:first-of-type{margin-top:20px}
-.ok{color:var(--ok);font-weight:800}.bad{color:var(--bad);font-weight:800}
-textarea{width:100%;min-height:190px;border:1px solid var(--line);border-radius:17px;padding:15px;font:inherit;line-height:1.5;resize:vertical;background:#fffafb;outline:none}
-textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px #b74d7214}
-footer{text-align:center;color:var(--deep);padding:27px 8px 12px;font-family:Georgia,serif;font-style:italic;font-size:1.02rem}
-footer:before{content:"✚  HP SANTA CRUZ  •  VIDAS EM BOAS MÃOS  ✚";display:block;font-family:system-ui,sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.15em;color:var(--rose);margin-bottom:10px}
-@media(max-width:520px){.wrap{padding:12px}.hero{padding-top:26px}.card{padding:20px 17px}.actions{flex-direction:column-reverse}.btn{width:100%}.mark{width:72px;height:72px}.q{font-size:1.04rem}}
+.pill{background:#fff;border:1px solid var(--line);padding:9px 15px;border-radius:999px;font-weight:850;color:var(--wine);box-shadow:0 6px 18px #741d4615}
+.progress{height:12px;background:#fff5f8;border:1px solid #f5c5d7;border-radius:20px;overflow:hidden;margin:18px 0 20px;box-shadow:inset 0 2px 5px #741d4615}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--deep),var(--pink),#ff77ad);width:0;transition:.45s cubic-bezier(.2,.8,.2,1);border-radius:20px;box-shadow:0 0 15px #ef3f8370}
+.sub{display:inline-block;color:#fff;background:linear-gradient(90deg,var(--wine),var(--hot));font-weight:900;letter-spacing:.07em;text-transform:uppercase;font-size:.72rem;padding:7px 11px;border-radius:999px}
+.q{font-size:1.15rem;font-weight:780;line-height:1.6;margin:16px 0 5px}
+.answers{display:grid;gap:11px;margin-top:20px}
+.answer{position:relative;width:100%;text-align:left;padding:16px 48px 16px 17px;border-radius:17px;border:1px solid #f2c2d4;background:linear-gradient(145deg,#fff,#fff5f9);font-size:1rem;cursor:pointer;color:var(--ink);transition:.2s;box-shadow:0 5px 14px #741d460c}
+.answer:hover,.answer:focus{border-color:var(--hot);transform:translateY(-2px) scale(1.005);outline:none;box-shadow:0 11px 24px #741d461c}
+.answer.selected{background:linear-gradient(135deg,#ffe2ed,#ffc9de);border:2px solid var(--hot);color:var(--deep);font-weight:800}
+.answer.selected:after{content:"✓";position:absolute;right:16px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:var(--pink);color:white}
+.actions{display:flex;justify-content:space-between;gap:11px;margin-top:24px}
+.btn{position:relative;overflow:hidden;border:0;border-radius:16px;padding:14px 22px;font-weight:900;cursor:pointer;transition:.2s}
+.primary{background:linear-gradient(135deg,var(--deep),var(--pink),var(--hot));color:white;box-shadow:0 10px 24px #741d4638}
+.primary:after{content:"";position:absolute;top:-30%;left:-35%;width:25%;height:160%;background:#fff5;transform:skewX(-20deg)}
+.primary:hover:after{animation:shine .65s ease}.primary:hover{transform:translateY(-2px)}
+.ghost{background:#ffe6f0;color:var(--wine);border:1px solid var(--line)}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.hidden{display:none}.score{text-align:center;font-family:Georgia,serif;font-size:3rem;color:var(--deep);font-weight:900;margin:14px 0}
+#timeFinal{text-align:center;color:var(--muted);font-weight:700}
+.review{border-top:1px solid #f1ccda;padding:17px 3px;line-height:1.48}.review:first-of-type{margin-top:20px}.ok{color:var(--ok);font-weight:850}.bad{color:var(--bad);font-weight:850}
+textarea{width:100%;min-height:200px;border:1px solid var(--line);border-radius:18px;padding:16px;font:inherit;line-height:1.55;resize:vertical;background:#fff8fb;outline:none}textarea:focus{border-color:var(--hot);box-shadow:0 0 0 4px #ef3f8316}
+footer{text-align:center;color:var(--deep);padding:30px 8px 12px;font-family:Georgia,serif;font-style:italic;font-size:1.04rem}
+footer:before{content:"✚  HP SANTA CRUZ  •  VIDAS EM BOAS MÃOS  •  S.A.V.E.  ✚";display:block;font-family:system-ui,sans-serif;font-style:normal;font-size:.66rem;letter-spacing:.14em;color:var(--pink);margin-bottom:11px;font-weight:850}
+@media(max-width:560px){.wrap{padding:11px}.hero{padding:27px 10px 22px}.card{padding:21px 17px}.actions{flex-direction:column-reverse}.btn{width:100%}.hp-badge{width:86px;height:86px}.hp-badge:before{font-size:48px}.intro-grid{grid-template-columns:1fr}.q{font-size:1.04rem}}
 </style>
 </head>
 <body><main class="wrap">
-<section class="hero"><div class="mark">✚</div><div class="sub">HOSPITAL SANTA CRUZ</div><h1>Teste Interativo</h1><p>Manual de Estudos • Condutas • RP • S.A.V.E. • Procedimentos</p></section>
-<section id="intro" class="card"><h2>Antes de começar</h2><p>São 20 questões: 19 de escolha múltipla e 1 questão final de desenvolvimento. O cronómetro acompanha o tempo total da prova. No final recebes a pontuação das questões objetivas e podes rever as respostas.</p><button id="start" class="btn primary">Começar teste</button></section>
+<section class="hero"><div class="hp-badge"></div><div class="brand">HOSPITAL SANTA CRUZ</div><h1>Teste Interativo</h1><p>Manual de Estudos • Condutas • RP • S.A.V.E. • Procedimentos</p><div class="medline"><span class="medchip">🩺 Corpo Clínico</span><span class="medchip">✚ Emergência</span><span class="medchip">🚑 S.A.V.E.</span><span class="medchip">📋 Avaliação</span></div></section>
+<section id="intro" class="card"><h2>Prova Oficial • HP Santa Cruz</h2><p>Uma avaliação criada a partir do Manual de Estudos do HP. São 19 questões de escolha múltipla e 1 desafio final de desenvolvimento. O cronómetro acompanha o tempo total e, no final, podes rever as respostas objetivas.</p><div class="intro-grid"><div class="info"><b>20</b>Questões</div><div class="info"><b>19</b>Objetivas</div><div class="info"><b>01</b>Desenvolvimento</div></div><button id="start" class="btn primary">Iniciar avaliação ✚</button></section>
 <section id="quiz" class="hidden">
 <div class="meta"><span id="counter" class="pill"></span><span id="timer" class="pill">00:00</span></div><div class="progress"><i id="bar"></i></div>
 <div class="card"><div id="type" class="sub"></div><p id="question" class="q"></p><div id="answers" class="answers"></div><div class="actions"><button id="prev" class="btn ghost">Anterior</button><button id="next" class="btn primary">Seguinte</button></div></div>
